@@ -1,94 +1,33 @@
+import java.util.Scanner;
+
 /**
  * TicTacToe
- * Combines UC1 (Board Initialization) and UC2 (Toss and Symbol Assignment).
+ * UC3 reads a slot number (1-9) entered by the user. This use case
+ * focuses only on input handling without validation.
  */
 public class tictactoe {
 
-    // --- State Variables ---
-    static char[][] board = new char[3][3];
-    static boolean isHumanTurn;
-    static char humanSymbol;
-    static char computerSymbol;
-
     /**
-     * Entry point of the program. 
-     * Executes the setup steps for the Tic-Tac-Toe game.
+     * Entry point of the program. Reads slot input and prints it back
+     * to verify correct user input handling.
      */
     public static void main(String[] args) {
-        System.out.println("Initializing the game board...");
-        initializeBoard();
-        printBoard();
-        
-        System.out.println("\nExecuting the coin toss...");
-        tossAndAssignSymbols();
-        displayTossResult();
-    }
 
-    // ==========================================
-    // UC1 Methods: Board Initialization & Output
-    // ==========================================
+        int slot = getUserSlot();
+        System.out.println("Slot entered: " + slot);
 
-    /**
-     * Initializes the 3x3 board by filling each cell with '-'
-     */
-    static void initializeBoard() {
-        for (int row = 0; row < 3; row++) {
-            for (int col = 0; col < 3; col++) {
-                board[row][col] = '-';
-            }
-        }
     }
 
     /**
-     * Prints the Tic-Tac-Toe board using horizontal and vertical separators
+     * Reads an integer slot value from the user.
+     * Input: Scanner object
+     * Output: Slot number (1-9)
+     * Hint: Validation will be added in later use cases.
      */
-    static void printBoard() {
-        System.out.println("-------------");
-        for (int row = 0; row < 3; row++) {
-            System.out.print("| ");
-            for (int col = 0; col < 3; col++) {
-                System.out.print(board[row][col] + " | ");
-            }
-            System.out.println(); 
-            System.out.println("-------------");
-        }
-    }
-
-    // ==========================================
-    // UC2 Methods: Coin Toss & Symbol Assignment
-    // ==========================================
-
-    /**
-     * Uses random logic to decide the first player and assigns symbols
-     */
-    static void tossAndAssignSymbols() {
-        // Generate a random number (0 or 1) to simulate a coin toss
-        int toss = (int) (Math.random() * 2);
-
-        // The player who goes first gets 'X'
-        if (toss == 1) {
-            isHumanTurn = true;
-            humanSymbol = 'X';
-            computerSymbol = 'O';
-        } else {
-            isHumanTurn = false;
-            computerSymbol = 'X';
-            humanSymbol = 'O';
-        }
-    }
-
-    /**
-     * Displays the toss result and symbol assignments
-     */
-    static void displayTossResult() {
-        System.out.println("--- Toss Result ---");
-        if (isHumanTurn) {
-            System.out.println("The Human won the toss and will play first.");
-        } else {
-            System.out.println("The Computer won the toss and will play first.");
-        }
-        System.out.println("Human Symbol: " + humanSymbol);
-        System.out.println("Computer Symbol: " + computerSymbol);
-        System.out.println("-------------------");
+    static int getUserSlot() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a slot number (1-9): ");
+        int userInput = scanner.nextInt();
+        return userInput;
     }
 }
